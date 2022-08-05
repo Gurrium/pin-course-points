@@ -6,7 +6,7 @@ routeFileInput.addEventListener('change', event => {
     const fileList = event.target.files;
     fileList[0].text().then(content => {
         data = parseData(content)
-        populateList(data)
+        updateList(data)
     })
 })
 
@@ -18,43 +18,99 @@ function parseData(content) {
             const nameTag = tag.querySelector('Name')
             const latitudeTag = tag.querySelector('LatitudeDegrees')
             const longitudeTag = tag.querySelector('LongitudeDegrees')
-            if (nameTag == null || latitudeTag == null || longitudeTag == null) {
+            const pointTypeTag = tag.querySelector('PointType')
+            const notesTag = tag.querySelector('Notes')
+
+            if (
+                ![
+                    nameTag,
+                    latitudeTag,
+                    longitudeTag
+                ]
+                    .every(e => e != null)
+            ) {
                 return null
             }
 
             const name = nameTag.textContent
-            if (name == '') {
-                name = '(empty point)'
-            }
-
             const latitude = parseFloat(latitudeTag.textContent)
             const longitude = parseFloat(longitudeTag.textContent)
             if (isNaN(longitude) || isNaN(latitude)) {
                 return null
             }
+            const type = pointTypeTag != null ? pointTypeTag.textContent : ''
+            const notes = notesTag != null ? notesTag.textContent : ''
 
             return {
                 name: name,
                 latitude: latitude,
                 longitude: longitude,
+                type: type,
+                notes: notes,
             }
         })
         .filter(e => e)
 }
 
-function populateList(data) {
+function updateList(data) {
+    while (coursePointList.firstChild) {
+        coursePointList.removeChild(coursePointList.firstChild);
+    }
+
     data.forEach(point => {
         const listItem = document.createElement('li')
-        listItem.textContent = '地点名: '
-
+        listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name
         const link = document.createElement('a')
-        link.href = `https://google.com/maps/@${point.latitude},${point.longitude},15z`
+        link.href = `https://google.com/maps/place/${point.latitude},${point.longitude}`
         link.target = '_blank'
-        link.textContent = point.name
+        link.textContent = `(${point.longitude}, ${point.latitude})`
         listItem.appendChild(link)
+
+        const nestedListItem = document.createElement('li')
+        nestedListItem.textContent = point.notes
+        const nestedList = document.createElement('ul')
+        nestedList.appendChild(nestedListItem)
 
         // TODO: bulk insert
         coursePointList.appendChild(listItem)
+        coursePointList.appendChild(nestedList)
     })
 
+}
+
+function pointTypeIcon(pointType) {
+    switch (pointType) {
+        case 'Generic':
+            return '⛳️'
+        case 'Summit':
+            return '🏔'
+        case 'Valley':
+            return '⾕'
+        case 'Water':
+            return '🍵'
+        case 'Food':
+            return '🍱'
+        case 'Danger':
+            return '⚠️'
+        case 'Left':
+            return '⬅️'
+        case 'Right':
+            return '➡️'
+        case 'Straight':
+            return '⬆️'
+        case 'First Aid':
+            return '🍙'
+        case '4th Category':
+            return '4️⃣'
+        case '3rd Category':
+            return '🥉'
+        case '2nd Category"':
+            return '🥈'
+        case '1st Category':
+            return '🥇'
+        case 'Hors Category':
+            return '🏆'
+        case 'Sprint':
+            return '🚴💨'
+    }
 }

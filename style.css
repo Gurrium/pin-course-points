@@ -1,0 +1,12 @@
+body {
+    width: 900px;
+    margin: 0 auto 0;
+}
+
+ul#course-point-list li:nth-child(n+2) {
+    margin: 1em 0 0;
+}
+
+ul#course-point-list ul li {
+    margin: 0.5em 0 0;
+}
