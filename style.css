@@ -4,6 +4,10 @@ body {
     color: #444
 }
 
+div#course-point-list-container>ul>li {
+    list-style: decimal;
+}
+
 div#course-point-list-container>ul>li:nth-child(n+2) {
     margin: 1em 0 0;
 }

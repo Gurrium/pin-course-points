@@ -57,13 +57,14 @@ function updateList(data) {
         .forEach(child => coursePointListContainer.removeChild(child))
 
     const coursePointList = document.createElement('ul')
+
     data.forEach(point => {
         const listItem = document.createElement('li')
-        listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name
+        listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name + ': '
         const link = document.createElement('a')
         link.href = `https://google.com/maps/place/${point.latitude},${point.longitude}`
         link.target = '_blank'
-        link.textContent = `(${point.longitude}, ${point.latitude})`
+        link.textContent = `${point.longitude}, ${point.latitude}`
         listItem.appendChild(link)
 
         const nestedListItem = document.createElement('li')
