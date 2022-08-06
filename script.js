@@ -1,6 +1,6 @@
 const parser = new DOMParser()
 const routeFileInput = document.getElementById('route-file-input')
-const coursePointList = document.getElementById('course-point-list')
+const coursePointListContainer = document.getElementById('course-point-list-container')
 
 routeFileInput.addEventListener('change', event => {
     const fileList = event.target.files;
@@ -53,10 +53,10 @@ function parseData(content) {
 }
 
 function updateList(data) {
-    while (coursePointList.firstChild) {
-        coursePointList.removeChild(coursePointList.firstChild);
-    }
+    [...coursePointListContainer.children]
+        .forEach(child => coursePointListContainer.removeChild(child))
 
+    const coursePointList = document.createElement('ul')
     data.forEach(point => {
         const listItem = document.createElement('li')
         listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name
@@ -76,6 +76,7 @@ function updateList(data) {
         coursePointList.appendChild(nestedList)
     })
 
+    coursePointListContainer.appendChild(coursePointList)
 }
 
 function pointTypeIcon(pointType) {
