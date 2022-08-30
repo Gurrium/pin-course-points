@@ -60,6 +60,7 @@ function updateList(data) {
 
     data.forEach(point => {
         const listItem = document.createElement('li')
+        listItem.classList.add(point.type)
         listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name + ': '
         const link = document.createElement('a')
         link.href = `https://google.com/maps/place/${point.latitude},${point.longitude}`
