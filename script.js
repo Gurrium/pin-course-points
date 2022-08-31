@@ -1,6 +1,42 @@
 const parser = new DOMParser()
 const routeFileInput = document.getElementById('route-file-input')
 const coursePointListContainer = document.getElementById('course-point-list-container')
+const filterFieldset = document.getElementById('filters')
+const pointTypeIcons = {
+    'Generic': '⛳️',
+    'Summit': '🏔',
+    'Valley': '⾕',
+    'Water': '🍵',
+    'Food': '🍱',
+    'Danger': '⚠️',
+    'Left': '⬅️',
+    'Right': '➡️',
+    'Straight': '⬆️',
+    'First Aid': '🍙',
+    '4th Category': '4️⃣',
+    '3rd Category': '🥉',
+    '2nd Category"': '🥈',
+    '1st Category': '🥇',
+    'Hors Category': '🏆',
+    'Sprint': '🚴💨',
+}
+
+Object.entries(pointTypeIcons).forEach(([key, value]) => {
+    let input = document.createElement('input')
+    input.id = key.replace(' ', '_').toLowerCase()
+    input.type = 'checkbox'
+    input.checked = true // TODO: true???
+
+    let label = document.createElement('label')
+    label.htmlFor = input.id
+    label.textContent = `${value} ${key}`
+
+    let div = document.createElement('div')
+    div.appendChild(input)
+    div.appendChild(label)
+
+    filterFieldset.appendChild(div)
+})
 
 routeFileInput.addEventListener('change', event => {
     const fileList = event.target.files;
@@ -81,6 +117,7 @@ function updateList(data) {
     coursePointListContainer.appendChild(coursePointList)
 }
 
+// TODO: pointTypeIconsを使うようにしてこっちは消す
 function pointTypeIcon(pointType) {
     switch (pointType) {
         case 'Generic':
