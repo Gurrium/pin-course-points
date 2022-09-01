@@ -16,6 +16,11 @@ div#course-point-list-container>ul>ul>li:nth-child(1) {
     margin: 0.5em 0 0;
 }
 
+div#course-point-list-container li.hidden,
+div#course-point-list-container li.hidden+ul {
+    display: none;
+}
+
 footer {
     text-align: center;
     font-size: 0.8rem;

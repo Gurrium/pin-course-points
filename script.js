@@ -15,17 +15,33 @@ const pointTypeIcons = {
     'First Aid': '🍙',
     '4th Category': '4️⃣',
     '3rd Category': '🥉',
-    '2nd Category"': '🥈',
+    '2nd Category': '🥈',
     '1st Category': '🥇',
     'Hors Category': '🏆',
     'Sprint': '🚴💨',
 }
 
+// TODO: pointTypeIconsの内、キーにスペースがあるとinvalidなクラスになる問題を修正する
 Object.entries(pointTypeIcons).forEach(([key, value]) => {
     let input = document.createElement('input')
     input.id = key.replace(' ', '_').toLowerCase()
     input.type = 'checkbox'
-    input.checked = true // TODO: true???
+    input.checked = true
+    input.addEventListener('change', event => {
+        if (event.target.checked) {
+            coursePointListContainer
+                .querySelectorAll(`li.${key}`)
+                .forEach(li => {
+                    li.classList.remove('hidden')
+                })
+        } else {
+            coursePointListContainer
+                .querySelectorAll(`li.${key}`)
+                .forEach(li => {
+                    li.classList.add('hidden')
+                })
+        }
+    })
 
     let label = document.createElement('label')
     label.htmlFor = input.id
