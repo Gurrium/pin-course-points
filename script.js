@@ -62,6 +62,11 @@ routeFileInput.addEventListener('change', event => {
     })
 })
 
+// TODO: 使う
+function keyFromPointTypeString(pointType) {
+    return pointType.replace(' ', '_').toLowerCase()
+}
+
 function parseData(content) {
     const doc = parser.parseFromString(content, 'text/xml')
     const coursePointTags = [...doc.getElementsByTagName('CoursePoint')]
