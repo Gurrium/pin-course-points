@@ -3,22 +3,87 @@ const routeFileInput = document.getElementById('route-file-input')
 const coursePointListContainer = document.getElementById('course-point-list-container')
 const filterFieldset = document.getElementById('filters')
 const pointTypeIcons = {
-    'Generic': '⛳️',
-    'Summit': '🏔',
-    'Valley': '⾕',
-    'Water': '🍵',
-    'Food': '🍱',
-    'Danger': '⚠️',
-    'Left': '⬅️',
-    'Right': '➡️',
-    'Straight': '⬆️',
-    'First Aid': '🍙',
-    '4th Category': '4️⃣',
-    '3rd Category': '🥉',
-    '2nd Category': '🥈',
-    '1st Category': '🥇',
-    'Hors Category': '🏆',
-    'Sprint': '🚴💨',
+    'Generic': {
+        class: 'generic',
+        label: 'Generic',
+        icon: '⛳️',
+    },
+    'Summit': {
+        class: 'summit',
+        label: 'Summit',
+        icon: '🏔',
+    },
+    'Valley': {
+        class: 'Valley',
+        label: 'Valley',
+        icon: '⾕',
+    },
+    'Water': {
+        class: 'Water',
+        label: 'Water',
+        icon: '🍵',
+    },
+    'Food': {
+        class: 'Food',
+        label: 'Food',
+        icon: '🍱',
+    },
+    'Danger': {
+        class: 'danger',
+        label: 'Danger',
+        icon: '⚠️',
+    },
+    'Left': {
+        class: 'Left',
+        label: 'Left',
+        icon: '⬅️',
+    },
+    'Right': {
+        class: 'right',
+        label: 'Right',
+        icon: '➡️',
+    },
+    'Straight': {
+        class: 'straight',
+        label: 'Straight',
+        icon: '⬆️',
+    },
+    'First Aid': {
+        class: 'first-aid',
+        label: 'First Aid',
+        icon: '🍙',
+    },
+    '4th Category': {
+        class: '4th-category',
+        label: '4th Category',
+        icon: '4️⃣',
+    },
+    '3rd Category': {
+        class: '3rd-category',
+        label: '3rd Category',
+        icon: '🥉',
+    },
+    '2nd Category': {
+        class: '2nd-category',
+        label: '2nd Category',
+        icon: '🥈',
+    },
+    '1st Category': {
+        class: '1st-category',
+        label: '1st Category',
+        icon: '🥇',
+    },
+    'Hors Category': {
+        class: 'hors-category',
+        label: 'Hors Category',
+        icon: '🏆',
+    },
+    'Sprint': {
+        class: 'sprint',
+        label: 'Sprint',
+        icon: '🚴💨',
+    },
+
 }
 
 // TODO: pointTypeIconsの内、キーにスペースがあるとinvalidなクラスになる問題を修正する
@@ -61,11 +126,6 @@ routeFileInput.addEventListener('change', event => {
         updateList(data)
     })
 })
-
-// TODO: 使う
-function keyFromPointTypeString(pointType) {
-    return pointType.replace(' ', '_').toLowerCase()
-}
 
 function parseData(content) {
     const doc = parser.parseFromString(content, 'text/xml')
