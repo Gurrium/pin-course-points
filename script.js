@@ -86,7 +86,7 @@ const pointTypes = {
 
 }
 
-Object.entries(pointTypes).forEach(([key, { class: classString, label: labelString, icon: icon }]) => {
+Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString, icon: icon }]) => {
     let input = document.createElement('input')
     input.id = `${classString}-checkbox`
     input.type = 'checkbox'
