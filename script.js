@@ -2,7 +2,7 @@ const parser = new DOMParser()
 const routeFileInput = document.getElementById('route-file-input')
 const coursePointListContainer = document.getElementById('course-point-list-container')
 const filterFieldset = document.getElementById('filters')
-const pointTypeIcons = {
+const pointTypes = {
     'Generic': {
         class: 'generic',
         label: 'Generic',
