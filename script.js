@@ -54,22 +54,22 @@ const pointTypeIcons = {
         icon: '🍙',
     },
     '4th Category': {
-        class: '4th-category',
+        class: 'fourth-category',
         label: '4th Category',
         icon: '4️⃣',
     },
     '3rd Category': {
-        class: '3rd-category',
+        class: 'third-category',
         label: '3rd Category',
         icon: '🥉',
     },
     '2nd Category': {
-        class: '2nd-category',
+        class: 'second-category',
         label: '2nd Category',
         icon: '🥈',
     },
     '1st Category': {
-        class: '1st-category',
+        class: 'first-category',
         label: '1st Category',
         icon: '🥇',
     },
