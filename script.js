@@ -86,22 +86,21 @@ const pointTypes = {
 
 }
 
-// TODO: pointTypeIconsの内、キーにスペースがあるとinvalidなクラスになる問題を修正する
-Object.entries(pointTypeIcons).forEach(([key, value]) => {
+Object.entries(pointTypes).forEach(([key, { class: classString, label: labelString, icon: icon }]) => {
     let input = document.createElement('input')
-    input.id = key.replace(' ', '_').toLowerCase()
+    input.id = `${classString}-checkbox`
     input.type = 'checkbox'
     input.checked = true
     input.addEventListener('change', event => {
         if (event.target.checked) {
             coursePointListContainer
-                .querySelectorAll(`li.${key}`)
+                .querySelectorAll(`li.${classString}`)
                 .forEach(li => {
                     li.classList.remove('hidden')
                 })
         } else {
             coursePointListContainer
-                .querySelectorAll(`li.${key}`)
+                .querySelectorAll(`li.${classString}`)
                 .forEach(li => {
                     li.classList.add('hidden')
                 })
@@ -110,7 +109,7 @@ Object.entries(pointTypeIcons).forEach(([key, value]) => {
 
     let label = document.createElement('label')
     label.htmlFor = input.id
-    label.textContent = `${value} ${key}`
+    label.textContent = `${icon} ${labelString}`
 
     let div = document.createElement('div')
     div.appendChild(input)
@@ -177,8 +176,9 @@ function updateList(data) {
 
     data.forEach(point => {
         const listItem = document.createElement('li')
-        listItem.classList.add(point.type)
-        listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name + ': '
+        const pointType = pointTypes[point.type]
+        listItem.classList.add(pointType.class)
+        listItem.textContent = `${pointType.icon} ${pointType.label}: `
         const link = document.createElement('a')
         link.href = `https://google.com/maps/place/${point.latitude},${point.longitude}`
         link.target = '_blank'
@@ -196,42 +196,4 @@ function updateList(data) {
     })
 
     coursePointListContainer.appendChild(coursePointList)
-}
-
-// TODO: pointTypeIconsを使うようにしてこっちは消す
-function pointTypeIcon(pointType) {
-    switch (pointType) {
-        case 'Generic':
-            return '⛳️'
-        case 'Summit':
-            return '🏔'
-        case 'Valley':
-            return '⾕'
-        case 'Water':
-            return '🍵'
-        case 'Food':
-            return '🍱'
-        case 'Danger':
-            return '⚠️'
-        case 'Left':
-            return '⬅️'
-        case 'Right':
-            return '➡️'
-        case 'Straight':
-            return '⬆️'
-        case 'First Aid':
-            return '🍙'
-        case '4th Category':
-            return '4️⃣'
-        case '3rd Category':
-            return '🥉'
-        case '2nd Category"':
-            return '🥈'
-        case '1st Category':
-            return '🥇'
-        case 'Hors Category':
-            return '🏆'
-        case 'Sprint':
-            return '🚴💨'
-    }
 }
