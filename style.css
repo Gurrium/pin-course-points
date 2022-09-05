@@ -4,6 +4,10 @@ body {
     color: #444
 }
 
+fieldset#filters label {
+    cursor: pointer;
+}
+
 div#course-point-list-container>ul>li {
     list-style: decimal;
 }
