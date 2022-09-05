@@ -83,7 +83,6 @@ const pointTypes = {
         label: 'Sprint',
         icon: '🚴💨',
     },
-
 }
 
 Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString, icon: icon }]) => {
