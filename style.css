@@ -1,3 +1,13 @@
+div.flex-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+div.flex-container div.flex-element {
+    flex: 1 1 25%;
+}
+
 body {
     width: 900px;
     margin: 0 auto 0;
