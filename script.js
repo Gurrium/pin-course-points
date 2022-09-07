@@ -1,6 +1,118 @@
 const parser = new DOMParser()
 const routeFileInput = document.getElementById('route-file-input')
 const coursePointListContainer = document.getElementById('course-point-list-container')
+const checkboxesContainer = document.querySelector('fieldset#filters > div.checkboxes')
+const pointTypes = {
+    'Generic': {
+        class: 'generic',
+        label: 'Generic',
+        icon: '⛳️',
+    },
+    'Summit': {
+        class: 'summit',
+        label: 'Summit',
+        icon: '🏔',
+    },
+    'Valley': {
+        class: 'Valley',
+        label: 'Valley',
+        icon: '⾕',
+    },
+    'Water': {
+        class: 'Water',
+        label: 'Water',
+        icon: '🍵',
+    },
+    'Food': {
+        class: 'Food',
+        label: 'Food',
+        icon: '🍱',
+    },
+    'Danger': {
+        class: 'danger',
+        label: 'Danger',
+        icon: '⚠️',
+    },
+    'Left': {
+        class: 'Left',
+        label: 'Left',
+        icon: '⬅️',
+    },
+    'Right': {
+        class: 'right',
+        label: 'Right',
+        icon: '➡️',
+    },
+    'Straight': {
+        class: 'straight',
+        label: 'Straight',
+        icon: '⬆️',
+    },
+    'First Aid': {
+        class: 'first-aid',
+        label: 'First Aid',
+        icon: '🍙',
+    },
+    '4th Category': {
+        class: 'fourth-category',
+        label: '4th Category',
+        icon: '4️⃣',
+    },
+    '3rd Category': {
+        class: 'third-category',
+        label: '3rd Category',
+        icon: '🥉',
+    },
+    '2nd Category': {
+        class: 'second-category',
+        label: '2nd Category',
+        icon: '🥈',
+    },
+    '1st Category': {
+        class: 'first-category',
+        label: '1st Category',
+        icon: '🥇',
+    },
+    'Hors Category': {
+        class: 'hors-category',
+        label: 'Hors Category',
+        icon: '🏆',
+    },
+    'Sprint': {
+        class: 'sprint',
+        label: 'Sprint',
+        icon: '🚴💨',
+    },
+}
+
+Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString, icon: icon }]) => {
+    let input = document.createElement('input')
+    input.id = `${classString}-checkbox`
+    input.type = 'checkbox'
+    input.checked = true
+    input.addEventListener('change', event => {
+        if (event.target.checked) {
+            coursePointListContainer
+                .querySelectorAll(`div#course-point-list-container li.${classString}`)
+                .forEach(li => li.classList.remove('hidden'))
+        } else {
+            coursePointListContainer
+                .querySelectorAll(`div#course-point-list-container li.${classString}`)
+                .forEach(li => li.classList.add('hidden'))
+        }
+    })
+
+    let label = document.createElement('label')
+    label.htmlFor = input.id
+    label.textContent = `${icon} ${labelString}`
+
+    let div = document.createElement('div')
+    div.classList.add('checkbox-container')
+    div.appendChild(input)
+    div.appendChild(label)
+
+    checkboxesContainer.appendChild(div)
+})
 
 routeFileInput.addEventListener('change', event => {
     const fileList = event.target.files;
@@ -60,7 +172,9 @@ function updateList(data) {
 
     data.forEach(point => {
         const listItem = document.createElement('li')
-        listItem.textContent = pointTypeIcon(point.type) + ' ' + point.name + ': '
+        const pointType = pointTypes[point.type]
+        listItem.classList.add(pointType.class)
+        listItem.textContent = `${pointType.icon} ${pointType.label}: `
         const link = document.createElement('a')
         link.href = `https://google.com/maps/place/${point.latitude},${point.longitude}`
         link.target = '_blank'
@@ -78,41 +192,4 @@ function updateList(data) {
     })
 
     coursePointListContainer.appendChild(coursePointList)
-}
-
-function pointTypeIcon(pointType) {
-    switch (pointType) {
-        case 'Generic':
-            return '⛳️'
-        case 'Summit':
-            return '🏔'
-        case 'Valley':
-            return '⾕'
-        case 'Water':
-            return '🍵'
-        case 'Food':
-            return '🍱'
-        case 'Danger':
-            return '⚠️'
-        case 'Left':
-            return '⬅️'
-        case 'Right':
-            return '➡️'
-        case 'Straight':
-            return '⬆️'
-        case 'First Aid':
-            return '🍙'
-        case '4th Category':
-            return '4️⃣'
-        case '3rd Category':
-            return '🥉'
-        case '2nd Category"':
-            return '🥈'
-        case '1st Category':
-            return '🥇'
-        case 'Hors Category':
-            return '🏆'
-        case 'Sprint':
-            return '🚴💨'
-    }
 }
