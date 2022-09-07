@@ -93,16 +93,12 @@ Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString
     input.addEventListener('change', event => {
         if (event.target.checked) {
             coursePointListContainer
-                .querySelectorAll(`li.${classString}`)
-                .forEach(li => {
-                    li.classList.remove('hidden')
-                })
+                .querySelectorAll(`div#course-point-list-container li.${classString}`)
+                .forEach(li => li.classList.remove('hidden'))
         } else {
             coursePointListContainer
-                .querySelectorAll(`li.${classString}`)
-                .forEach(li => {
-                    li.classList.add('hidden')
-                })
+                .querySelectorAll(`div#course-point-list-container li.${classString}`)
+                .forEach(li => li.classList.add('hidden'))
         }
     })
 
