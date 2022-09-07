@@ -1,13 +1,3 @@
-div.flex-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-
-div.flex-container div.flex-element {
-    flex: 1 1 25%;
-}
-
 body {
     width: 900px;
     margin: 0 auto 0;
@@ -16,6 +6,16 @@ body {
 
 fieldset#filters label {
     cursor: pointer;
+}
+
+div.checkboxes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+div.checkboxes div.checkbox-container {
+    flex: 1 1 25%;
 }
 
 div#course-point-list-container>ul>li {

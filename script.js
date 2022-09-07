@@ -1,7 +1,7 @@
 const parser = new DOMParser()
 const routeFileInput = document.getElementById('route-file-input')
 const coursePointListContainer = document.getElementById('course-point-list-container')
-const filterFieldset = document.getElementById('filters')
+const checkboxesContainer = document.querySelector('fieldset#filters > div.checkboxes')
 const pointTypes = {
     'Generic': {
         class: 'generic',
@@ -111,10 +111,11 @@ Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString
     label.textContent = `${icon} ${labelString}`
 
     let div = document.createElement('div')
+    div.classList.add('checkbox-container')
     div.appendChild(input)
     div.appendChild(label)
 
-    filterFieldset.appendChild(div)
+    checkboxesContainer.appendChild(div)
 })
 
 routeFileInput.addEventListener('change', event => {
