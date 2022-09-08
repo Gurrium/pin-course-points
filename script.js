@@ -113,6 +113,9 @@ Object.entries(pointTypes).forEach(([_, { class: classString, label: labelString
 
     checkboxesContainer.appendChild(div)
 })
+const pad = document.createElement('div')
+pad.classList.add('checkboxes-pad')
+checkboxesContainer.appendChild(pad)
 
 routeFileInput.addEventListener('change', event => {
     const fileList = event.target.files;
