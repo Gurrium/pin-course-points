@@ -15,7 +15,11 @@ div.checkboxes {
 }
 
 div.checkboxes div.checkbox-container {
-    flex: 1 1 25%;
+    flex: 1 1 auto;
+}
+
+div.checkboxes div.checkboxes-pad {
+    flex: 10 1 auto;
 }
 
 div#course-point-list-container>ul>li {
