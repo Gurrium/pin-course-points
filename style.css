@@ -16,6 +16,11 @@ div.checkboxes {
 
 div.checkboxes div.checkbox-container {
     flex: 1 1 auto;
+    margin: 0 10px;
+}
+
+div.checkboxes div.checkbox-container input {
+    margin: 0 0.5em 0 0;
 }
 
 div.checkboxes div.checkboxes-pad {
