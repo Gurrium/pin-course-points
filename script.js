@@ -14,17 +14,17 @@ const pointTypes = {
         icon: '🏔',
     },
     'Valley': {
-        class: 'Valley',
+        class: 'valley',
         label: 'Valley',
         icon: '⾕',
     },
     'Water': {
-        class: 'Water',
+        class: 'water',
         label: 'Water',
         icon: '🍵',
     },
     'Food': {
-        class: 'Food',
+        class: 'food',
         label: 'Food',
         icon: '🍱',
     },
