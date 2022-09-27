@@ -118,6 +118,7 @@ pad.classList.add('checkboxes-pad')
 checkboxesContainer.appendChild(pad)
 
 routeFileInput.addEventListener('change', event => {
+    // TODO: この時点ではチェックボックスの状態が反映されないのを直す
     const fileList = event.target.files;
     fileList[0].text().then(content => {
         data = parseData(content)
@@ -189,10 +190,23 @@ function updateList(data) {
         const nestedList = document.createElement('ul')
         nestedList.appendChild(nestedListItem)
 
-        // TODO: bulk insert
         coursePointList.appendChild(listItem)
         coursePointList.appendChild(nestedList)
     })
 
     coursePointListContainer.appendChild(coursePointList)
 }
+
+document.getElementById('button-for-show-all').addEventListener('click', e => {
+    document.querySelectorAll('div.checkboxes input').forEach(checkbox => {
+        checkbox.checked = true
+        checkbox.dispatchEvent(new Event('change'))
+    })
+})
+
+document.getElementById('button-for-hide-all').addEventListener('click', e => {
+    document.querySelectorAll('div.checkboxes input').forEach(checkbox => {
+        checkbox.checked = false
+        checkbox.dispatchEvent(new Event('change'))
+    })
+})
