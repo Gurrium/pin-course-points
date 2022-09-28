@@ -119,7 +119,7 @@ checkboxesContainer.appendChild(pad)
 
 routeFileInput.addEventListener('change', event => {
     // TODO: この時点ではチェックボックスの状態が反映されないのを直す
-    const fileList = event.target.files;
+    const fileList = event.target.files
     fileList[0].text().then(content => {
         data = parseData(content)
         updateList(data)
