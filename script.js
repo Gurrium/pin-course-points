@@ -118,7 +118,6 @@ pad.classList.add('checkboxes-pad')
 checkboxesContainer.appendChild(pad)
 
 routeFileInput.addEventListener('change', event => {
-    // TODO: この時点ではチェックボックスの状態が反映されないのを直す
     const fileList = event.target.files
     fileList[0].text().then(content => {
         data = parseData(content)
@@ -184,6 +183,10 @@ function updateList(data) {
         link.target = '_blank'
         link.textContent = `(${point.longitude}, ${point.latitude})`
         listItem.appendChild(link)
+
+        if (!document.querySelector(`div.checkboxes input#${pointType.class}-checkbox`).checked) {
+            listItem.classList.add('hidden')
+        }
 
         const nestedListItem = document.createElement('li')
         nestedListItem.textContent = point.notes
