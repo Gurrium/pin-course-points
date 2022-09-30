@@ -8,6 +8,10 @@ fieldset#filters label {
     cursor: pointer;
 }
 
+div#buttons-container {
+    margin: 0 0 0.5em 0;
+}
+
 div.checkboxes {
     display: flex;
     flex-direction: row;
